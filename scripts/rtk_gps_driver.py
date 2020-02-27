@@ -39,7 +39,7 @@ ZONE_LET = 3
 def parse_gps_data(gps_data):
 	msg = GNSS()
 	msg.lat = None
-	sections = line.split(',')
+	sections = gps_data.split(',')
 	try:
 		if sections[LAT_DIR] == 'S':
 			sign = -1.0
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 			if line == "":
 				rospy.logwarn("GPS: no data")
 			else:
-				if line.startswith("$GPGGA"):
+				if line.startswith("$GNGGA"):
 					rospy.loginfo(line)
 					msg = parse_gps_data(line)
 					if msg.lat != None:
