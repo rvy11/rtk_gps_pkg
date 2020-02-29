@@ -108,7 +108,6 @@ if __name__ == "__main__":
 		sys.exit()
 	# file_handle = open("data.txt", "r")
 	rospy.logdebug("Setting up serial port for GPS device, port = %s, baud rate = %s" % (port_handle, baud_rate))
-	rate = rospy.Rate(5)
 	try:
 		while not rospy.is_shutdown():
 			line = port.readline()
@@ -121,7 +120,6 @@ if __name__ == "__main__":
 					msg = parse_gps_data(line)
 					if msg.lat != None:
 						out.publish(msg)
-			rate.sleep()
 	except rospy.ROSInterruptException:
 		port.close()
 	except serial.serialutil.SerialException:
